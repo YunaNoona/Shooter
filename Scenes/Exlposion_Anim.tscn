@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3uriq6x1mniy"]
+
+[ext_resource type="Texture2D" uid="uid://ttwsgmsodoav" path="res://Assets/Sprites/Dead anim/death_0.png" id="1_2sg7c"]
+[ext_resource type="Texture2D" uid="uid://dd0aq5umrxj22" path="res://Assets/Sprites/Dead anim/death_1.png" id="2_ctdyc"]
+[ext_resource type="Texture2D" uid="uid://bugmww0gwh2js" path="res://Assets/Sprites/Dead anim/death_2.png" id="3_tacvq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_81rws"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2sg7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ctdyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tacvq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_2sg7c")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 20.0
+}]
+
+[node name="ExplosionAnim" type="AnimatedSprite2D"]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_81rws")
+animation = &"Idle"
+autoplay = "Idle"
+frame = 3
+frame_progress = 1.0

@@ -1,0 +1,173 @@
+[gd_scene load_steps=13 format=3 uid="uid://jhj5itfdi14l"]
+
+[ext_resource type="Texture2D" uid="uid://k1o2nroluihr" path="res://Assets/Sprites/Weapons/weapon_1_pistol.png" id="1_02q03"]
+[ext_resource type="Script" uid="uid://cphuhyqnraem4" path="res://Scripts/Weapon_Pickup.gd" id="1_yukwd"]
+[ext_resource type="Texture2D" uid="uid://b0d6xe0sreis5" path="res://Assets/Sprites/Shadow.png" id="2_8qb6n"]
+[ext_resource type="Texture2D" uid="uid://d0ioacy2yuqsg" path="res://Assets/Sprites/tile_coin.png" id="3_ovc61"]
+[ext_resource type="FontFile" uid="uid://c4x0jidjvbcs3" path="res://Assets/Fonts/kenpixel_mini_square.ttf" id="4_33wch"]
+[ext_resource type="AudioStream" uid="uid://dnkvodvly3gi6" path="res://Assets/Sound/BubblePop.wav" id="5_33wch"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yukwd"]
+size = Vector2(380, 574.286)
+
+[sub_resource type="Animation" id="Animation_02q03"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -100), Vector2(0, 40), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.3), Vector2(0.8, 1.3), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.4, 0.4), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yukwd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8qb6n"]
+_data = {
+&"Idle": SubResource("Animation_02q03"),
+&"RESET": SubResource("Animation_yukwd")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_fka7s"]
+font = ExtResource("4_33wch")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_ovc61"]
+font = ExtResource("4_33wch")
+font_size = 100
+
+[node name="WeaponPickUp" type="Area2D"]
+scale = Vector2(0.35, 0.35)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_yukwd")
+
+[node name="WeaponSprite" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_02q03")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+z_index = 1
+position = Vector2(-1, 365.714)
+texture = ExtResource("2_8qb6n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.42857, 187.143)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_yukwd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8qb6n")
+}
+autoplay = "Idle"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(350, 0)
+offset_left = -174.286
+offset_top = 491.429
+offset_right = 175.714
+offset_bottom = 616.429
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("3_ovc61")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PriceLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "50"
+label_settings = SubResource("LabelSettings_fka7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuyLabel" type="Label" parent="."]
+visible = false
+offset_left = -300.0
+offset_top = 637.143
+offset_right = 414.0
+offset_bottom = 762.143
+text = "Purchase [ F ]"
+label_settings = SubResource("LabelSettings_ovc61")
+
+[node name="Audio_PickUP" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_33wch")
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

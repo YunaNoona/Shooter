@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://dd0dbk4bpjii2"]
+
+[ext_resource type="PackedScene" uid="uid://djjrr53cykr6u" path="res://Scenes/Bullet.tscn" id="1_2rn4i"]
+[ext_resource type="Script" uid="uid://b07a6gnc1a03x" path="res://Scripts/WeaponData.gd" id="1_5goj3"]
+[ext_resource type="Texture2D" uid="uid://qlmyauce5r36" path="res://Assets/Sprites/Weapons/weapon_2_m4.png" id="1_irtbp"]
+
+[resource]
+script = ExtResource("1_5goj3")
+gun_sprite = ExtResource("1_irtbp")
+gun_colour = Color(0.0774704, 0.268671, 0.2243, 1)
+buy_price = 60
+damage = 3.5
+delay_between_shots = 0.5
+fire_pos = Vector2(580, -10)
+bullet_scene = ExtResource("1_2rn4i")
+metadata/_custom_type_script = "uid://b07a6gnc1a03x"

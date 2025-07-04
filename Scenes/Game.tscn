@@ -1,0 +1,131 @@
+[gd_scene load_steps=15 format=3 uid="uid://c6j5ee6jmebnb"]
+
+[ext_resource type="PackedScene" uid="uid://dnqtnaqoedjh0" path="res://Scenes/Player.tscn" id="1_iukft"]
+[ext_resource type="Script" uid="uid://yd68kiel0axl" path="res://Scripts/Game.gd" id="1_j5yw3"]
+[ext_resource type="Texture2D" uid="uid://drpmj5jkfv8o7" path="res://Assets/Sprites/Extras/crosshair.png" id="2_gl6un"]
+[ext_resource type="Texture2D" uid="uid://ubm1eqcoxtwx" path="res://Assets/Sprites/Environment/ground2_white.png" id="4_kldst"]
+[ext_resource type="PackedScene" uid="uid://jhj5itfdi14l" path="res://Scenes/Weapons.tscn" id="5_7lihs"]
+[ext_resource type="AudioStream" uid="uid://c3h5mideq18id" path="res://Assets/Sound/music.mp3" id="5_b2bpf"]
+[ext_resource type="Resource" uid="uid://ko8mlv2k5hi4" path="res://Data/W_AR.tres" id="6_3so38"]
+[ext_resource type="Resource" uid="uid://b8j8w7fq0sjlc" path="res://Data/W_Auto_Pistol.tres" id="7_3cx6b"]
+[ext_resource type="Resource" uid="uid://dryf65fwojwvf" path="res://Data/W_DoubleShotGun.tres" id="8_wxwew"]
+[ext_resource type="Resource" uid="uid://dd0dbk4bpjii2" path="res://Data/W_M416.tres" id="9_acvyw"]
+[ext_resource type="Resource" uid="uid://b8xthspugij0h" path="res://Data/W_Pistol.tres" id="10_alh3a"]
+[ext_resource type="Resource" uid="uid://dbxybhvud7tcj" path="res://Data/W_ShotGun.tres" id="11_4q8tf"]
+[ext_resource type="PackedScene" uid="uid://blph4vkjdh4ek" path="res://Scenes/Rock.tscn" id="13_3cx6b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kldst"]
+size = Vector2(6144, 20)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_j5yw3")
+
+[node name="BackGround" type="Sprite2D" parent="."]
+modulate = Color(0.584314, 0.560784, 0.764706, 1)
+position = Vector2(-3072, -3072)
+scale = Vector2(3, 3)
+texture = ExtResource("4_kldst")
+centered = false
+
+[node name="CrossHair" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_gl6un")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.65, 0.65)
+limit_left = -3072
+limit_top = -3072
+limit_right = 3072
+limit_bottom = 3072
+
+[node name="Player" parent="." instance=ExtResource("1_iukft")]
+position = Vector2(388, 300)
+
+[node name="Colliders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Colliders"]
+position = Vector2(0, 3083)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/StaticBody2D"]
+shape = SubResource("RectangleShape2D_kldst")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Colliders"]
+position = Vector2(0, -3082)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/StaticBody2D2"]
+shape = SubResource("RectangleShape2D_kldst")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Colliders"]
+position = Vector2(-3082, 0)
+rotation = 1.5708
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/StaticBody2D3"]
+shape = SubResource("RectangleShape2D_kldst")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Colliders"]
+position = Vector2(3082, -16)
+rotation = 1.5708
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/StaticBody2D4"]
+shape = SubResource("RectangleShape2D_kldst")
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="WeaponPickUp1" parent="Weapons" instance=ExtResource("5_7lihs")]
+position = Vector2(-759, 0)
+weapon_data = ExtResource("10_alh3a")
+
+[node name="WeaponPickUp2" parent="Weapons" instance=ExtResource("5_7lihs")]
+position = Vector2(-459, 0)
+weapon_data = ExtResource("9_acvyw")
+
+[node name="WeaponPickUp3" parent="Weapons" instance=ExtResource("5_7lihs")]
+position = Vector2(-159, 0)
+weapon_data = ExtResource("6_3so38")
+
+[node name="WeaponPickUp4" parent="Weapons" instance=ExtResource("5_7lihs")]
+position = Vector2(141, 0)
+weapon_data = ExtResource("7_3cx6b")
+
+[node name="WeaponPickUp5" parent="Weapons" instance=ExtResource("5_7lihs")]
+position = Vector2(441, 0)
+weapon_data = ExtResource("8_wxwew")
+
+[node name="WeaponPickUp6" parent="Weapons" instance=ExtResource("5_7lihs")]
+position = Vector2(741, 0)
+weapon_data = ExtResource("11_4q8tf")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_b2bpf")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Rock" parent="Environment" instance=ExtResource("13_3cx6b")]
+
+[node name="Rock2" parent="Environment" instance=ExtResource("13_3cx6b")]
+position = Vector2(-1613, -637)
+
+[node name="Rock3" parent="Environment" instance=ExtResource("13_3cx6b")]
+position = Vector2(1171, -1111)
+
+[node name="Rock4" parent="Environment" instance=ExtResource("13_3cx6b")]
+position = Vector2(-1648, 1379)
+
+[node name="Rock5" parent="Environment" instance=ExtResource("13_3cx6b")]
+position = Vector2(-2114, -2104)
+
+[node name="Rock6" parent="Environment" instance=ExtResource("13_3cx6b")]
+position = Vector2(1423, 1576)
+
+[node name="Rock7" parent="Environment" instance=ExtResource("13_3cx6b")]
+position = Vector2(295, -2203)
+
+[node name="Rock8" parent="Environment" instance=ExtResource("13_3cx6b")]
+position = Vector2(-941, 2409)

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://djjrr53cykr6u"]
+
+[ext_resource type="Script" uid="uid://bhrt0q8vl6xqg" path="res://Scripts/Bullet.gd" id="1_vlxeq"]
+[ext_resource type="Texture2D" uid="uid://b6irhpunowl8a" path="res://Assets/Sprites/Extras/bullet.png" id="2_14k46"]
+[ext_resource type="Texture2D" uid="uid://b0d6xe0sreis5" path="res://Assets/Sprites/Shadow.png" id="3_qvus8"]
+[ext_resource type="AudioStream" uid="uid://d2usimra7pxry" path="res://Assets/Sound/Explosion.wav" id="4_pypll"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qvus8"]
+radius = 62.9676
+
+[node name="SingleBullet" type="Node2D"]
+script = ExtResource("1_vlxeq")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.05, 0.05)
+collision_layer = 0
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("2_14k46")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(8.97143, 8.97143)
+shape = SubResource("CircleShape2D_qvus8")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+position = Vector2(0, 140)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_qvus8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pypll")
+volume_db = -15.0
+bus = &"SFX"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
