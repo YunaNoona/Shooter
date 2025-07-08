@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://raevcdff4a8x"]
+
+[ext_resource type="Texture2D" uid="uid://b0d6xe0sreis5" path="res://Assets/Sprites/Shadow.png" id="1_dtys3"]
+[ext_resource type="Script" uid="uid://bxcc7gvwyfoep" path="res://Scripts/SpawnAnim.gd" id="2_r0l38"]
+
+[sub_resource type="Animation" id="Animation_r0l38"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_ggd08"]
+resource_name = "Spawn"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.35, 0.35), Vector2(0.25, 0.25), Vector2(0.35, 0.35), Vector2(0.25, 0.25), Vector2(0.35, 0.35), Vector2(0.25, 0.25)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_enemy"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dtys3"]
+_data = {
+&"RESET": SubResource("Animation_r0l38"),
+&"Spawn": SubResource("Animation_ggd08")
+}
+
+[node name="SpawnAnim" type="Sprite2D"]
+self_modulate = Color(1, 1, 1, 0.705882)
+z_index = -1
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_dtys3")
+script = ExtResource("2_r0l38")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dtys3")
+}
+autoplay = "Spawn"

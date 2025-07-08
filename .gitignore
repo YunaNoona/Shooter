@@ -1,3 +1,16 @@
-# Godot 4+ specific ignores
+# Godot engine-specific
+.import/
 .godot/
-/android/
+export.cfg
+export_presets.cfg
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Temporary / backup files
+*.tmp

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqw04hkfhfrmh"]
+
+[ext_resource type="Script" uid="uid://cqs0581yqhri8" path="res://Scripts/Enemy.gd" id="1_m1htj"]
+[ext_resource type="PackedScene" uid="uid://b82uce2oyfcb5" path="res://Components/Health.tscn" id="2_wovta"]
+[ext_resource type="PackedScene" uid="uid://cf6l2pmh80gr4" path="res://Scenes/HealthBar.tscn" id="3_xeo28"]
+
+[node name="BaseEnemy" type="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_m1htj")
+
+[node name="AnimSprite" type="AnimatedSprite2D" parent="."]
+
+[node name="Shadow" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_wovta")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="HealthBar" parent="." instance=ExtResource("3_xeo28")]
+scale = Vector2(3, 3)
+
+[connection signal="on_damaged" from="HealthComponent" to="." method="_on_health_component_on_damaged"]
+[connection signal="on_defeated" from="HealthComponent" to="." method="_on_health_component_on_defeated"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

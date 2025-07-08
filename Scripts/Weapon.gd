@@ -33,6 +33,10 @@ func shoot_weapon() -> void:
 	bullet.move_direction = (get_global_mouse_position() - global_position).normalized()
 	fire_audio.play()
 	anim_player.play("Shoot")
+	
+	#Camera Shake Effect
+	GameManager.on_shake_request.emit()
+	
 	get_tree().root.add_child(bullet)
 	
 	
@@ -43,4 +47,3 @@ func rotate_weapon(value: bool ) -> void:
 	else:
 		weapon_sprite.flip_v = false
 		fire_pos.position.y = -50
-		

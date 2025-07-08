@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://cdlbtk2xxlub5"]
+
+[ext_resource type="PackedScene" uid="uid://dqw04hkfhfrmh" path="res://Scenes/Enemy.tscn" id="1_afte0"]
+[ext_resource type="Texture2D" uid="uid://b84ywbjrox8jm" path="res://Assets/Sprites/Entities/Enemy 3/fly_0.png" id="2_bn7an"]
+[ext_resource type="Texture2D" uid="uid://c0wwc6ukoe6ca" path="res://Assets/Sprites/Entities/Enemy 3/fly_1.png" id="3_v6mng"]
+[ext_resource type="Texture2D" uid="uid://0854frjae20" path="res://Assets/Sprites/Entities/Enemy 3/fly_2.png" id="4_xc1eg"]
+[ext_resource type="Texture2D" uid="uid://dteqeyh64480n" path="res://Assets/Sprites/Entities/Enemy 3/fly_3.png" id="5_yyesk"]
+[ext_resource type="Texture2D" uid="uid://bk5kyqb2g3emo" path="res://Assets/Sprites/Entities/Enemy 3/fly_4.png" id="6_35nfh"]
+[ext_resource type="Texture2D" uid="uid://ckrkjtgj6ncub" path="res://Assets/Sprites/Entities/Enemy 3/fly_5.png" id="7_u2mah"]
+[ext_resource type="Texture2D" uid="uid://b0d6xe0sreis5" path="res://Assets/Sprites/Shadow.png" id="8_v6mng"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ku3lg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bn7an")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bn7an")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v6mng")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xc1eg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yyesk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_35nfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_u2mah")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 14.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bn7an"]
+radius = 232.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6mng"]
+radius = 420.0
+height = 840.0
+
+[node name="EnemyFly" instance=ExtResource("1_afte0")]
+
+[node name="AnimSprite" parent="." index="0"]
+position = Vector2(0, -632)
+sprite_frames = SubResource("SpriteFrames_ku3lg")
+animation = &"Move"
+autoplay = "Move"
+
+[node name="Shadow" parent="." index="1"]
+modulate = Color(1, 1, 1, 0.470588)
+position = Vector2(0, 60)
+texture = ExtResource("8_v6mng")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -248)
+shape = SubResource("CircleShape2D_bn7an")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(0, -256)
+shape = SubResource("CapsuleShape2D_v6mng")
+debug_color = Color(0.966129, 0.308029, 0.377949, 0.42)
+
+[node name="HealthBar" parent="." index="5"]
+offset_left = -256.0
+offset_top = -916.0
+offset_right = -256.0
+offset_bottom = -916.0
