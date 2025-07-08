@@ -4,7 +4,6 @@ class_name Game
 @onready var player: Player = $Player
 @onready var crosshair: Sprite2D = $CrossHair
 @onready var camera_2d: Camera2D = $Camera2D
-
 @onready var weapons: Node2D = $Weapons
 @onready var enemy_spawner: EnemySpawner = $EnemySpawner
 
@@ -13,20 +12,22 @@ class_name Game
 @onready var coins_label: Label = %CoinsLabel
 @onready var wave_timer: Timer = $WaveTimer
 
-
-
-#Setting Function So When We Start The Game Mouse Is Hidden
+@onready var game_over_ui: Control = $GameOverUI
+@onready var btn_restart: Button = $GameOverUI/BTN_Restart
+@onready var btn_quit: Button = $GameOverUI/BTN_Quit
 
 func _ready() -> void:
 	wave_timer.start()
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	
-	#Add Game Player Global Ref 
-	
+
 	GameManager.player = player
-	
-	
-#Update CrossHair And Camera Position  
+	GameManager.on_game_over.connect(_on_game_over)
+
+	game_over_ui.visible = false
+
+	# Button callbacks
+	btn_restart.pressed.connect(_on_restart_pressed)
+	btn_quit.pressed.connect(_on_quit_pressed)
 
 func _process(_delta: float) -> void:
 	crosshair.global_position = get_global_mouse_position()
@@ -35,16 +36,28 @@ func _process(_delta: float) -> void:
 	coins_label.text = str(GameManager.coins)
 	enemy_count_label.text = "Enemy: %s" % str(enemy_spawner.enemies_remainig)
 
-
 func _on_enemy_spawner_on_wave_completed() -> void:
 	weapons.show()
 	wave_label.show()
 	enemy_count_label.hide()
 	wave_timer.start()
-	
 
 func _on_wave_timer_timeout() -> void:
 	weapons.hide()
 	wave_label.hide()
 	enemy_count_label.show()
 	enemy_spawner.start_enemy_timer()
+
+func _on_game_over() -> void:
+	print("💀 Game Over triggered and UI shown")
+	print("Is Button Restart paused?:", btn_restart.is_inside_tree() and btn_restart.is_processing())
+	game_over_ui.visible = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().paused = true
+
+func _on_restart_pressed() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()

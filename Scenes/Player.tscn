@@ -212,6 +212,7 @@ libraries = {
 }
 
 [node name="HealthComponent" parent="." instance=ExtResource("31_c43xd")]
+max_health = 2.0
 
 [node name="HealthBar" parent="." instance=ExtResource("32_avx33")]
 offset_left = -256.0
