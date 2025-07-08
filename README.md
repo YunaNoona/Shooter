@@ -30,9 +30,9 @@ Fight off waves of enemies, collect coins, and upgrade your weapons in an arcade
 ## 📂 Project Structure
 
 Shooter/
-├── Assets/         # Sprites and images /n
-├── Material/       # Shader and material files /n
-├── Scenes/         # Game scenes (enemies, coins, weapons, etc.) /n
-├── Scripts/        # GDScript files for gameplay /n
-├── Components/     # Reusable node-based components (e.g., Health) /n
-├── Game.tscn       # Main game scene /n
+├── Assets/         # Sprites and images
+├── Material/       # Shader and material files
+├── Scenes/         # Game scenes (enemies, coins, weapons, etc.)
+├── Scripts/        # GDScript files for gameplay
+├── Components/     # Reusable node-based components (e.g., Health)
+├── Game.tscn       # Main game scene
