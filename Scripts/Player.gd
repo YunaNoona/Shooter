@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name Player
 
 @export var move_speed := 700.0
-
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon: Weapon = $Weapon
 @onready var health_component: HealthComponent = $HealthComponent
@@ -12,7 +11,12 @@ class_name Player
 var can_move: bool = true
 var mouse_pos: Vector2
 
-func _process(_delta: float) -> void:
+func _ready():
+	# Small delay to prevent immediate death on restart
+	await get_tree().process_frame
+	print("Player ready, can_move:", can_move)
+
+func _process(delta: float) -> void:
 	if not can_move or GameManager.is_game_over:
 		return
 	get_mouse_pos()
@@ -52,17 +56,27 @@ func _on_health_component_on_damaged() -> void:
 	anim_sprite.material = null
 
 func _on_health_component_on_defeated() -> void:
+	print("Player defeated")
+	
+	# Prevent multiple death calls
+	if GameManager.is_game_over:
+		return
+		
 	anim_sprite.play("Death")
 	can_move = false
 	health_bar.hide()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
+	
+	# Set game over state
 	GameManager.is_game_over = true
-	GameManager.call_deferred("emit_signal", "on_game_over")
-
+	
+	# Disable weapon processing
 	weapon.set_process(false)
 	weapon.set_physics_process(false)
 	if is_instance_valid(weapon):
 		weapon.call_deferred("queue_free")
-
+	
+	# Disable collision
 	collision.set_deferred("disabled", true)
+	
+	# Emit game over signal
+	GameManager.call_deferred("emit_signal", "on_game_over")

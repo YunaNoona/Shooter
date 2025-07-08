@@ -6,13 +6,18 @@ signal on_game_over
 
 const EXLPOSION_ANIM = preload("res://Scenes/Exlposion_Anim.tscn")
 const COIN = preload("res://Scenes/Coin.tscn")
-
 const HIT_MATERIAL = preload("res://Material/HitMaterial.tres")
 const DAMAGE_TEXT = preload("res://Scenes/DamageText.tscn")
 
 var player: Player
 var coins: int = 500
 var is_game_over: bool = false
+
+# Reset function to call when restarting
+func reset_game_state():
+	is_game_over = false
+	coins = 500
+	print("Game state reset")
 
 func play_explosion_anim(pos: Vector2) -> void:
 	var anim: AnimatedSprite2D = EXLPOSION_ANIM.instantiate()
