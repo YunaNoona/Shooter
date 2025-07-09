@@ -1,5 +1,7 @@
 extends Node
 
+@warning_ignore("unused_signal")
+
 signal on_enemy_died
 signal on_shake_request
 signal on_game_over
@@ -13,7 +15,6 @@ var player: Player
 var coins: int = 500
 var is_game_over: bool = false
 
-# Reset function to call when restarting
 func reset_game_state():
 	is_game_over = false
 	coins = 500
@@ -34,8 +35,7 @@ func play_damage_text(pos: Vector2, value: int) -> void:
 	damage.setup(value)
 
 func create_coin(pos: Vector2) -> void:
-	var random_value = randf_range(0, 100)
-	if random_value <= 70:
+	if randf_range(0, 100) <= 70:
 		var coin := COIN.instantiate() as Coin
 		coin.global_position = pos
 		get_parent().call_deferred("add_child", coin)

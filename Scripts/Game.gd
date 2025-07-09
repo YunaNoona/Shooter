@@ -10,10 +10,10 @@ class_name Game
 @onready var enemy_count_label: Label = %EnemyCountLabel
 @onready var coins_label: Label = %CoinsLabel
 @onready var wave_timer: Timer = $WaveTimer
+@onready var game_over_ui: Control = $CanvasLayer/GameOverUI
+@onready var btn_restart: Button = $CanvasLayer/GameOverUI/BTN_Restart
+@onready var btn_quit: Button = $CanvasLayer/GameOverUI/BTN_Quit
 
-@onready var game_over_ui: Control = $GameOverUI
-@onready var btn_restart: Button = $GameOverUI/BTN_Restart
-@onready var btn_quit: Button = $GameOverUI/BTN_Quit
 
 func _ready() -> void:
 	# 🔁 Reset global game state
@@ -44,7 +44,7 @@ func _ready() -> void:
 
 	print("✅ Game ready, game_over state:", GameManager.is_game_over)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not GameManager.is_game_over:
 		crosshair.global_position = get_global_mouse_position()
 		camera_2d.global_position = player.global_position

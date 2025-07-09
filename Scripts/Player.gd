@@ -16,7 +16,7 @@ func _ready():
 	await get_tree().process_frame
 	print("Player ready, can_move:", can_move)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not can_move or GameManager.is_game_over:
 		return
 	get_mouse_pos()
