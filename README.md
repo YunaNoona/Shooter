@@ -15,7 +15,7 @@ Fight off waves of enemies, collect coins, and upgrade your weapons in an arcade
 - 💰 Coin system + pickups after kills
 - 📈 Wave system with countdown timer and enemy counter
 - 🎧 Sound effects on coin pickup, damage, weapon equip
-- 🛑 Game over logic (in progress)
+- 🛑 Game over logic
 
 ---
 
