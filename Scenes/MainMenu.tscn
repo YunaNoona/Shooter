@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://62pr0s81n05d"]
+
+[ext_resource type="Script" uid="uid://hf3ftd0v1qpv" path="res://Scripts/MainMenu.gd" id="1_tt5f1"]
+
+[node name="MainMenu" type="Control"]
+modulate = Color(0.596078, 0.603922, 0.341176, 1)
+z_index = 6
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tt5f1")
+
+[node name="BTN_Start" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 880.0
+offset_top = 500.0
+offset_right = 1040.0
+offset_bottom = 560.0
+scale = Vector2(0.8, 0.8)
+action_mode = 0
+text = "Start"
+icon_alignment = 1
+
+[node name="BTN_Quit" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 880.0
+offset_top = 580.0
+offset_right = 1040.0
+offset_bottom = 640.0
+scale = Vector2(0.8, 0.8)
+action_mode = 0
+text = "Quit"

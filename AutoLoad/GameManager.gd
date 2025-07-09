@@ -3,7 +3,13 @@ extends Node
 @warning_ignore("unused_signal")
 
 signal on_enemy_died
+
+@warning_ignore("unused_signal")
+
 signal on_shake_request
+
+@warning_ignore("unused_signal")
+
 signal on_game_over
 
 const EXLPOSION_ANIM = preload("res://Scenes/Exlposion_Anim.tscn")
